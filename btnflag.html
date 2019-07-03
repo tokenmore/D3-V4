@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+	<body>
+		<button id="btn">展开</button>
+		<script type="text/javascript" src="js/jquery-3.1.1.min.js" ></script>
+		<script>
+			$(function(){
+				var aa=0;
+				$("#btn").attr("flag",aa);
+				$(document).on("click","#btn",function(){
+					aa ++;
+						$("#btn").attr("flag",aa);
+						flag = $("#btn").attr("flag");
+						alert(flag);
+				})
+			});
+		</script>
+	</body>
+</html>

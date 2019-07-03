@@ -1,0 +1,380 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        [role=entity]{
+            fill:rgb(44, 160, 44)
+        }
+        [role=concept]{
+            fill:rgb(0, 112, 192)
+        }
+    </style>
+    <link rel="stylesheet" href="css/bootstrap.min.css" />
+    <script type="text/javascript" src="js/jquery-3.2.1.min.js" ></script>
+    <script src="js/d3.v4.min.js"></script>
+</head>
+<body>
+<svg width="960" height="500" class="col-sm-9"></svg>
+<div id="btn" class="col-sm-3">
+	
+</div>
+</body>
+<script type="text/javascript">
+	var dataset;
+    dataset={
+    "nodes": [
+        {
+            "labelName": "刘玉凤",
+            "type": "Customer",
+            "customerId": "410703194903263525",
+            "customerName": "刘玉凤",
+            "telId": null,
+            "hospitalId": null,
+            "hospitaLevel": null,
+            "hospitalName": null,
+            "empid": null,
+            "accTime": null,
+            "caseId": null,
+            "orgno": null,
+            "pfmoney": null,
+            "qzflag": null,
+            "value": 14
+        },
+        {
+            "labelName": "ZHZ153000029797",
+            "type": "AccidentCase",
+            "customerId": null,
+            "customerName": null,
+            "telId": null,
+            "hospitalId": null,
+            "hospitaLevel": null,
+            "hospitalName": null,
+            "empid": null,
+            "accTime": "2015-08-25",
+            "caseId": "ZHZ153000029797",
+            "orgno": "00000000004523",
+            "pfmoney": "616.0",
+            "qzflag": "0",
+            "value": 6
+        },
+        {
+            "labelName": "18749107699",
+            "type": "Telephone",
+            "customerId": null,
+            "customerName": null,
+            "telId": "18749107699",
+            "hospitalId": null,
+            "hospitaLevel": null,
+            "hospitalName": null,
+            "empid": null,
+            "accTime": null,
+            "caseId": null,
+            "orgno": null,
+            "pfmoney": null,
+            "qzflag": null,
+            "value": 15
+        },
+        {
+            "labelName": "18749107899",
+            "type": "Telephone",
+            "customerId": null,
+            "customerName": null,
+            "telId": "18749107899",
+            "hospitalId": null,
+            "hospitaLevel": null,
+            "hospitalName": null,
+            "empid": null,
+            "accTime": null,
+            "caseId": null,
+            "orgno": null,
+            "pfmoney": null,
+            "qzflag": null,
+            "value": 12
+        },
+        {
+            "labelName": "新乡市中心医院",
+            "type": "Hospital",
+            "customerId": null,
+            "customerName": null,
+            "telId": null,
+            "hospitalId": "02",
+            "hospitaLevel": "02",
+            "hospitalName": "新乡市中心医院",
+            "empid": null,
+            "accTime": null,
+            "caseId": null,
+            "orgno": null,
+            "pfmoney": null,
+            "qzflag": null,
+            "value": 9
+        }
+    ],
+    "links": [
+        {
+            "source": 0,
+            "target": 1,
+            "relation": "是报案人",
+            "value": 3
+        },
+        {
+            "source": 2,
+            "target": 1,
+            "relation": "是报案电话",
+            "value": 15
+        },
+        {
+            "source": 0,
+            "target": 2,
+            "relation": "使用",
+            "value": 13
+        },
+        {
+            "source": 0,
+            "target": 3,
+            "relation": "使用",
+            "value": 8
+        },
+        {
+            "source": 1,
+            "target": 4,
+            "relation": "治疗于",
+            "value": 18
+        }
+    ]
+};
+
+ var nodes = dataset.nodes;
+var links = dataset.links;
+    var width = 960;
+    var height = 800;
+    var svg = d3.select("svg")
+        .attr("width",width)
+        .attr("height",height);
+    var circle_radius = 30;
+ 
+    // 通过布局来转换数据，然后进行绘制
+    var simulation = d3.forceSimulation(nodes)
+        .force("link", d3.forceLink(links).distance(200))
+        .force("charge",d3.forceManyBody().strength(-100))
+        .force("center",d3.forceCenter(width/2, height/2));
+ 
+    var color = d3.scaleOrdinal(d3.schemeCategory20);
+    // 绘制线
+    var svg_links = svg.selectAll("path")
+        .data(links)
+        .enter()
+        .append("path")
+        .attr("id",function(d,i){
+        	return "edgepath"+i;
+        })
+        .style("stroke",function(d){
+        	return color(d.value);
+        })
+        .style("stroke-width",3);
+       
+    //节点对象
+    var svg_nodes = svg.selectAll("circle")
+        .data(nodes)
+        .enter()
+        .append("circle")
+        .attr("r",circle_radius)
+        .attr("title",function(d){
+        	return d.labelName;
+        })
+        .call(d3.drag()
+            .on("start", dragstarted)
+            .on("drag", dragged)
+            .on("end", dragended));
+ //节点描述
+    var svg_text = svg.selectAll("text")
+        .data(nodes)
+        .enter()
+        .append("text")
+        .style("fill","#000")
+        .attr("dominant-baseline","middle")
+        .attr("text-anchor", "middle")//在圆圈中加上数据
+        .text(function(d){
+        	return d.labelName;});
+        	
+        	
+ 	var edges_text = svg.append("g").selectAll(".edgelabel")
+	.data(links)
+	.enter()
+	.append("text")
+	.style("pointer-events", "none").
+	style("fill",function(d){
+		return color(d.value)
+	}).attr("class","edgelabel")
+	.attr("id",function(d,i){return 'edgetext'+i;})
+	.attr("dx",80)
+	.attr("dy",0)
+	.attr("font-size",10);
+//设置线条上的文字
+	edges_text.append('textPath')
+	.attr('xlink:href',function(d,i) {return '#edgepath'+i})
+	.style("pointer-events", "none")
+	.text(function(d){return d.relation;});
+    /**
+     * 节点（开始）拖拽事件
+     */
+    function dragstarted(d) {
+        if (!d3.event.active)
+            simulation.alphaTarget(0.002).restart();
+        d.fx = d.x;
+        d.fy = d.y;
+    }
+ 
+    /**
+     * 节点拖拽事件
+     */
+    function dragged(d) {
+        d.fx = d3.event.x;
+        d.fy = d3.event.y;
+    }
+ 
+    /**
+     * 节点（结束）拖拽事件
+     */
+    function dragended(d) {
+        if (!d3.event.active)
+            simulation.alphaTarget(0);
+    }
+    
+    //箭头
+    var marker=
+        svg.append("marker")
+            .attr("id", "resolved")
+            .attr("markerUnits","userSpaceOnUse")
+            .attr("viewBox", "0 -5 10 10")//坐标系的区域
+            .attr("refX",34)//箭头坐标
+            .attr("refY", -1)
+            .attr("markerWidth", 12)//标识的大小
+            .attr("markerHeight", 12)
+            .attr("orient", "auto")//绘制方向，可设定为：auto（自动确认方向）和 角度值
+            .attr("stroke-width",2)//箭头宽度
+            .append("path")
+            .attr("d", "M0,-5L10,0L0,5")//箭头的路径
+            .attr('fill','#000000');//箭头颜色
+ 
+ 
+    function draw(){
+        svg_nodes
+            .attr("cx",function(d){return d.x;})
+            .attr("cy",function(d){return d.y;})
+            .attr("fill",function (d) {
+                return color(d.value);
+            });
+ 
+        svg_text
+            .attr("x", function(d){ return d.x; })
+            .attr("y", function(d){ return d.y; });
+ 
+        svg_links
+            .attr("d",function(d){
+                return 'M '+d.source.x+' '+d.source.y+' L '+ d.target.x +' '+d.target.y
+            })
+            .attr("marker-end", "url(#resolved)");
+    }
+    simulation.on("tick",draw);
+    svg.call(d3.zoom().scaleExtent([0.05, 8]).on('zoom', () => {
+        // 保存当前缩放的属性值
+        var transform = d3.event.transform;
+        svg_nodes.attr('transform', transform);
+        svg_links.attr("transform",transform);
+        svg_text.attr("transform",transform);
+//      edges_text.attr("transform",transform);
+    })).on('dblclick.zoom', null);
+ 
+</script>
+<script>
+	$(function(){
+		//遍历node节点
+		$.each(nodes,function(index,val){
+			//当发生点击事件时，触发函数，获取到当前点击的节点
+			$(document).on("click","circle",function(){
+				var label = val.labelName;//获取当前的节点名字，根据此变量判断此节点和那些边对应。
+				var text = $(this).attr("title");
+				if(label == text){
+					$.each(links, function(i,d) {
+						var source = links[i].source;
+						var target = links[i].target;
+						if(source.labelName==label || target.labelName == label ){
+							var textid = "#edgetext" + i+"";
+							var pathid = "#edgepath"+i+"";
+							$(textid).hide();
+							$(pathid).hide();
+							var ttch = "text:eq(" + index + ")";
+							$(ttch).hide();
+						}
+					});
+				}
+				
+				$(this).hide();
+			});
+		});
+	});
+</script>
+<script>
+$(function(){
+	var btndiv = $("#btn");
+	$.each(nodes,function(i,d){
+		var tdEl = $("<button class='btn btn-primary show'></button>").append(d.type);
+		tdEl.attr("title",d.labelName);
+		btndiv.append(tdEl);
+	});
+	var flag = true;
+	$(document).on("click",".show",function(){
+		alert($(this).text());
+		$.each(nodes, function(index,val) {
+			if($("#btn").text()=="隐藏"){
+				var label = $("#btn").attr("title");//获取当前的节点名字，根据此变量判断此节点和那些边对应。
+				var text = $("circle:eq("+index+")").attr("title");
+				if(text == label){
+					$.each(links, function(i,d) {
+							var source = links[i].source;
+							var target = links[i].target;
+							if(source.labelName==label || target.labelName == label ){
+								var textid = "#edgetext" + i+"";
+								var pathid = "#edgepath"+i+"";
+								$(textid).hide();
+								$(pathid).hide();
+								var ttch = "text:eq(" + index + ")";
+								$(ttch).hide();
+							}
+					});
+					$("circle:eq("+index+")").hide();
+					$("#btn").text("显示");
+				}
+			}else{
+				var label = $("#btn").attr("title");//获取当前的节点名字，根据此变量判断此节点和那些边对应。
+				var text = $("circle:eq("+index+")").attr("title");
+				if(text == label){
+					$.each(links, function(i,d) {
+							var source = links[i].source;
+							var target = links[i].target;
+							if(source.labelName==label || target.labelName == label ){
+								var textid = "#edgetext" + i+"";
+								var pathid = "#edgepath"+i+"";
+								$(textid).show();
+								$(pathid).show();
+								var ttch = "text:eq(" + index + ")";
+								$(ttch).show();
+							}
+					});
+					$("circle:eq("+index+")").show();
+					$("#btn").text("隐藏");
+				}
+			}
+		});
+	});
+});
+</script>
+</html>
+ 
+<!----------------------- 
+作者：xu187 
+来源：CSDN 
+原文：https://blog.csdn.net/xu187/article/details/80256587 
+版权声明：本文为博主原创文章，转载请附上博文链接！-->

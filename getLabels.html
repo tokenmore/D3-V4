@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<script type="text/javascript" src="js/jquery-3.1.1.min.js" ></script>
+		<script type="text/javascript" src="js/d3.v4.min.js" ></script>
+	</head>
+<body>
+<table>
+	<tbody>
+	<tr>
+	</tr>
+	</tbody>
+</table>		
+<script>
+//			var width=960,height=800;
+//			var dataset={
+//	"nodes": [{
+//		"uid": 1012,
+//		"name": "刘家豪",
+//		"sex": "男",
+//		"age": 23,
+//		"hobbies": "[打, 游, 戏]"
+//	}, {
+//		"uid": 1013,
+//		"name": "韩世玲",
+//		"sex": "女",
+//		"age": 23,
+//		"hobbies": "[听, 歌]"
+//	}, {
+//		"uid": 1015,
+//		"name": "周灵",
+//		"sex": "女",
+//		"age": 23,
+//		"hobbies": "[听, 歌]"
+//	}, {
+//		"uid": 1016,
+//		"name": "张宝",
+//		"sex": "男",
+//		"age": 23,
+//		"hobbies": "[打, 游, 戏]"
+//	}],
+//	"edges": [{
+//		"source": 0,
+//		"target": 1,
+//		"weight":0,
+//		"relation": "likes",
+//		"value": 0.5
+//	}, {
+//		"source": 2,
+//		"target": 3,
+//		"weight":1,
+//		"relation": "likes",
+//		"value": 1.2
+//	}]
+//};
+//			var nodes = dataset.nodes;
+//			var links=dataset.edges;
+//			var svg  = d3.select('body').append("svg").attr("width",width).attr("height",height);
+//			var simulation = d3.forceSimulation(nodes)
+//      		.force("link", d3.forceLink(links).distance(200))
+//      		.force("charge",d3.forceManyBody().strength(-100))
+//      		.force("center",d3.forceCenter(width/2, height/2));
+//          var color = d3.scaleOrdinal(d3.schemeCategory20);//颜色标尺
+//          var btn = svg.selectAll("circle").data(nodes).enter()
+//          	.append("circle").attr("class","btn").text(function(d){
+//          		return d.name;
+//          	}).attr("r",function(d){
+//          		return d.age;
+//          	}).attr("cx",100).attr("cy",50);
+
+</script>
+<script>
+	$(function(){
+		var dataset={
+	"nodes": [{
+		"uid": 1012,
+		"name": "刘家豪",
+		"sex": "男",
+		"age": 23,
+		"hobbies": "[打, 游, 戏]"
+	}, {
+		"uid": 1013,
+		"name": "韩世玲",
+		"sex": "女",
+		"age": 23,
+		"hobbies": "[听, 歌]"
+	}, {
+		"uid": 1015,
+		"name": "周灵",
+		"sex": "女",
+		"age": 23,
+		"hobbies": "[听, 歌]"
+	}, {
+		"uid": 1016,
+		"name": "张宝",
+		"sex": "男",
+		"age": 23,
+		"hobbies": "[打, 游, 戏]"
+	}],
+	"edges": [{
+		"source": 0,
+		"target": 1,
+		"weight":0,
+		"relation": "likes",
+		"value": 0.5
+	}, {
+		"source": 2,
+		"target": 3,
+		"weight":1,
+		"relation": "likes",
+		"value": 1.2
+	}]
+};
+			var nodes = dataset.nodes;
+			var links=dataset.edges;
+		$.each(nodes,function(index,val){
+//			var btnEl = $("<button></button>").append(val.name);
+//			btnEl.text(val.name);
+//			var tableEL = $("<table></table>");
+			var tdEl = $("<td></td>").append(val.name);
+			var trEl = $("<tr></tr>");
+			trEl.append(tdEl);
+//			btnEl.appendTo(tdEl);
+				console.log(val.name);
+		});
+	});
+</script>
+	</body>
+</html>

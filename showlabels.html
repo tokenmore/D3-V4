@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<script type="text/javascript" src="js/jquery-3.1.1.min.js" ></script>
+	</head>
+	<body>
+		<button id="show">显示</button>
+	</body>
+<script>
+		$(function(){
+				var dataset={
+	"nodes": [{
+		"uid": 1012,
+		"name": "刘家豪",
+		"sex": "男",
+		"age": 23,
+		"hobbies": "[打, 游, 戏]"
+	}, {
+		"uid": 1013,
+		"name": "韩世玲",
+		"sex": "女",
+		"age": 23,
+		"hobbies": "[听, 歌]"
+	}, {
+		"uid": 1015,
+		"name": "周灵",
+		"sex": "女",
+		"age": 23,
+		"hobbies": "[听, 歌]"
+	}, {
+		"uid": 1016,
+		"name": "张宝",
+		"sex": "男",
+		"age": 23,
+		"hobbies": "[打, 游, 戏]"
+	}],
+	"edges": [{
+		"source": 0,
+		"target": 1,
+		"weight":0,
+		"relation": "likes",
+		"value": 0.5
+	}, {
+		"source": 2,
+		"target": 3,
+		"weight":1,
+		"relation": "likes",
+		"value": 1.2
+	}]
+};
+			var nodes = dataset.nodes;
+			var links = dataset.links;
+			var tbEL = $("<table style='border: 1px solid black;height: 300px;width: 500px;'></table>");
+			var trEl = $("<tr></tr>");
+			tbEL.append(trEl);
+			$("body").append(tbEL);
+				
+			$(document).on("click","#show",function(){
+				
+				console.log(tbEL);
+				$.each(nodes, function(index,val) {
+					var tdEl = $("<td></td>").append(val.name);
+					tdEl.appendTo(trEl);
+				});
+			});
+});
+		</script>
+</html>
