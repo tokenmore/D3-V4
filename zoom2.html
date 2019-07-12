@@ -292,58 +292,6 @@ var links = dataset.links;
         svg_text.attr("transform",transform);
     })).on('dblclick.zoom', null);
  
-//  //动态添加节点
-//  var e = { name: "河北",role:"entity"};
-//  var f =  {source : 7  , target: 2};
-//  d3.timeout(function(){
-//      nodes.push(e);
-//      links.push(f);
-//      restart()
-//  }, 4000);
-//  function restart() {
-//      // Apply the general update pattern to the nodes.
-//      // Apply the general update pattern to the links.
-//      svg_links = svg_links
-//          .data(links, (d) => { return d.source.name + "-" + d.target.name; });
-// 
-//      svg_links = svg_links.enter()
-//          .append("path")
-//          .style("stroke","#ccc")
-//          .style("stroke-width",3)
-//          .merge(svg_links);
-// 
-//      svg_nodes = svg_nodes
-//          .data(nodes, (d) => d.name)
-//          .enter()
-//          .append("circle")
-//          .attr("r",circle_radius)
-//          .merge(svg_nodes).call(d3.drag()
-//              .on("start", dragstarted)
-//              .on("drag", dragged)
-//              .on("end", dragended));
-//      var dom = document.querySelectorAll("circle");
-//      for (let len = dom.length, i = 0; i < len; i++) {
-//          if (d3.select(dom[i]). select('circle').empty()) {
-//              svg_nodes.append("circle")
-//                  .attr("fill", (d) => color(d.name))
-//                  .attr("r", 30);
-//          }
-//      }
-//      //节点描述
-//      svg_text = svg_text
-//          .data(nodes,(d) => d.name)
-//          .enter()
-//          .append("text")
-//          .style("fill","#000")
-//          .attr("dominant-baseline","middle")
-//          .attr("text-anchor", "middle")//在圆圈中加上数据
-//          .text(function(d){return d.name;}).merge(svg_text);
-//      // svg_text = svg_text.data()
-//      // Update and restart the simulation.
-//      simulation.nodes(nodes);
-//      simulation.force("link").links(links);
-//      simulation.alpha(1).restart();
-//  }
 </script>
 <script>
 	$(function(){

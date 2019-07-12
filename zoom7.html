@@ -1,0 +1,1443 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="css/bootstrap.min.css" />
+    <script type="text/javascript" src="js/jquery-3.2.1.min.js" ></script>
+    <script src="js/d3.v4.min.js"></script>
+</head>
+<body>
+<svg width="960" height="500" class="col-sm-11"></svg>
+<div id="btn" class="col-sm-1">	
+<button class="btn btn-primary show" title="Hospital" flag="0">Hospital</button>
+<button class="btn btn-primary show" title="Telephone" flag="0">Telephone</button>
+<button class="btn btn-primary show" title="AccidentCase" flag="0">AccidentCase</button>
+<button class="btn btn-primary show" title="Customer" flag="0">Customer</button>
+</div>
+</body>
+<script type="text/javascript">
+var dataset={
+    "nodes": [
+        {
+            "labelName": "倪桂香",
+            "type": "Customer",
+            "customerId": "410826196706160024",
+            "customerName": "倪桂香",
+            "telId": null,
+            "hospitalId": null,
+            "hospitaLevel": null,
+            "hospitalName": null,
+            "empid": null,
+            "accTime": null,
+            "caseId": null,
+            "orgno": null,
+            "pfmoney": null,
+            "qzflag": null,
+            "value": 4
+        },
+        {
+            "labelName": "ZHZ153000032563",
+            "type": "AccidentCase",
+            "customerId": null,
+            "customerName": null,
+            "telId": null,
+            "hospitalId": null,
+            "hospitaLevel": null,
+            "hospitalName": null,
+            "empid": null,
+            "accTime": "2015-10-15",
+            "caseId": "ZHZ153000032563",
+            "orgno": "00000000004519",
+            "pfmoney": "21984.47",
+            "qzflag": "0",
+            "value": 16
+        },
+        {
+            "labelName": "靳亲民",
+            "type": "Customer",
+            "customerId": "410802196811012057",
+            "customerName": "靳亲民",
+            "telId": null,
+            "hospitalId": null,
+            "hospitaLevel": null,
+            "hospitalName": null,
+            "empid": null,
+            "accTime": null,
+            "caseId": null,
+            "orgno": null,
+            "pfmoney": null,
+            "qzflag": null,
+            "value": 3
+        },
+        {
+            "labelName": "13723185755",
+            "type": "Telephone",
+            "customerId": null,
+            "customerName": null,
+            "telId": "13723185755",
+            "hospitalId": null,
+            "hospitaLevel": null,
+            "hospitalName": null,
+            "empid": null,
+            "accTime": null,
+            "caseId": null,
+            "orgno": null,
+            "pfmoney": null,
+            "qzflag": null,
+            "value": 6
+        },
+        {
+            "labelName": "左言哲",
+            "type": "Customer",
+            "customerId": "370225195801120016",
+            "customerName": "左言哲",
+            "telId": null,
+            "hospitalId": null,
+            "hospitaLevel": null,
+            "hospitalName": null,
+            "empid": null,
+            "accTime": null,
+            "caseId": null,
+            "orgno": null,
+            "pfmoney": null,
+            "qzflag": null,
+            "value": 16
+        },
+        {
+            "labelName": "QID153000004374",
+            "type": "AccidentCase",
+            "customerId": null,
+            "customerName": null,
+            "telId": null,
+            "hospitalId": null,
+            "hospitaLevel": null,
+            "hospitalName": null,
+            "empid": null,
+            "accTime": "2015-03-30",
+            "caseId": "QID153000004374",
+            "orgno": "00000000000018",
+            "pfmoney": "15000.0",
+            "qzflag": "0",
+            "value": 15
+        },
+        {
+            "labelName": "13854233266",
+            "type": "Telephone",
+            "customerId": null,
+            "customerName": null,
+            "telId": "13854233266",
+            "hospitalId": null,
+            "hospitaLevel": null,
+            "hospitalName": null,
+            "empid": null,
+            "accTime": null,
+            "caseId": null,
+            "orgno": null,
+            "pfmoney": null,
+            "qzflag": null,
+            "value": 6
+        },
+        {
+            "labelName": "青岛大学医学院附属医院",
+            "type": "Hospital",
+            "customerId": null,
+            "customerName": null,
+            "telId": null,
+            "hospitalId": "02",
+            "hospitaLevel": "02",
+            "hospitalName": "青岛大学医学院附属医院",
+            "empid": null,
+            "accTime": null,
+            "caseId": null,
+            "orgno": null,
+            "pfmoney": null,
+            "qzflag": null,
+            "value": 16
+        },
+        {
+            "labelName": "曹惠芳",
+            "type": "Customer",
+            "customerId": "142702197207010026",
+            "customerName": "曹惠芳",
+            "telId": null,
+            "hospitalId": null,
+            "hospitaLevel": null,
+            "hospitalName": null,
+            "empid": null,
+            "accTime": null,
+            "caseId": null,
+            "orgno": null,
+            "pfmoney": null,
+            "qzflag": null,
+            "value": 16
+        },
+        {
+            "labelName": "TAY153000005648",
+            "type": "AccidentCase",
+            "customerId": null,
+            "customerName": null,
+            "telId": null,
+            "hospitalId": null,
+            "hospitaLevel": null,
+            "hospitalName": null,
+            "empid": null,
+            "accTime": "2015-01-12",
+            "caseId": "TAY153000005648",
+            "orgno": "00000000000004",
+            "pfmoney": "600.0",
+            "qzflag": "0",
+            "value": 12
+        },
+        {
+            "labelName": "15935900606",
+            "type": "Telephone",
+            "customerId": null,
+            "customerName": null,
+            "telId": "15935900606",
+            "hospitalId": null,
+            "hospitaLevel": null,
+            "hospitalName": null,
+            "empid": null,
+            "accTime": null,
+            "caseId": null,
+            "orgno": null,
+            "pfmoney": null,
+            "qzflag": null,
+            "value": 10
+        },
+        {
+            "labelName": "TAYU0090",
+            "type": "Employee",
+            "customerId": null,
+            "customerName": null,
+            "telId": null,
+            "hospitalId": null,
+            "hospitaLevel": null,
+            "hospitalName": null,
+            "empid": "TAYU0090",
+            "accTime": null,
+            "caseId": null,
+            "orgno": null,
+            "pfmoney": null,
+            "qzflag": null,
+            "value": 8
+        },
+        {
+            "labelName": "黄晓蓉",
+            "type": "Customer",
+            "customerId": "510802197112095007",
+            "customerName": "黄晓蓉",
+            "telId": null,
+            "hospitalId": null,
+            "hospitaLevel": null,
+            "hospitalName": null,
+            "empid": null,
+            "accTime": null,
+            "caseId": null,
+            "orgno": null,
+            "pfmoney": null,
+            "qzflag": null,
+            "value": 2
+        },
+        {
+            "labelName": "CHD153000024207",
+            "type": "AccidentCase",
+            "customerId": null,
+            "customerName": null,
+            "telId": null,
+            "hospitalId": null,
+            "hospitaLevel": null,
+            "hospitalName": null,
+            "empid": null,
+            "accTime": "2015-10-12",
+            "caseId": "CHD153000024207",
+            "orgno": "00000000000027",
+            "pfmoney": "318.4",
+            "qzflag": "0",
+            "value": 5
+        },
+        {
+            "labelName": "梁慧",
+            "type": "Customer",
+            "customerId": "510812200411145307",
+            "customerName": "梁慧",
+            "telId": null,
+            "hospitalId": null,
+            "hospitaLevel": null,
+            "hospitalName": null,
+            "empid": null,
+            "accTime": null,
+            "caseId": null,
+            "orgno": null,
+            "pfmoney": null,
+            "qzflag": null,
+            "value": 4
+        },
+        {
+            "labelName": "18981224125",
+            "type": "Telephone",
+            "customerId": null,
+            "customerName": null,
+            "telId": "18981224125",
+            "hospitalId": null,
+            "hospitaLevel": null,
+            "hospitalName": null,
+            "empid": null,
+            "accTime": null,
+            "caseId": null,
+            "orgno": null,
+            "pfmoney": null,
+            "qzflag": null,
+            "value": 14
+        },
+        {
+            "labelName": "18798122412",
+            "type": "Telephone",
+            "customerId": null,
+            "customerName": null,
+            "telId": "18798122412",
+            "hospitalId": null,
+            "hospitaLevel": null,
+            "hospitalName": null,
+            "empid": null,
+            "accTime": null,
+            "caseId": null,
+            "orgno": null,
+            "pfmoney": null,
+            "qzflag": null,
+            "value": 3
+        },
+        {
+            "labelName": "广元市中医院",
+            "type": "Hospital",
+            "customerId": null,
+            "customerName": null,
+            "telId": null,
+            "hospitalId": "03",
+            "hospitaLevel": "03",
+            "hospitalName": "广元市中医院",
+            "empid": null,
+            "accTime": null,
+            "caseId": null,
+            "orgno": null,
+            "pfmoney": null,
+            "qzflag": null,
+            "value": 14
+        },
+        {
+            "labelName": "洪淑宝",
+            "type": "Customer",
+            "customerId": "350583196708314968",
+            "customerName": "洪淑宝",
+            "telId": null,
+            "hospitalId": null,
+            "hospitaLevel": null,
+            "hospitalName": null,
+            "empid": null,
+            "accTime": null,
+            "caseId": null,
+            "orgno": null,
+            "pfmoney": null,
+            "qzflag": null,
+            "value": 16
+        },
+        {
+            "labelName": "XIM153000000053",
+            "type": "AccidentCase",
+            "customerId": null,
+            "customerName": null,
+            "telId": null,
+            "hospitalId": null,
+            "hospitaLevel": null,
+            "hospitalName": null,
+            "empid": null,
+            "accTime": "2015-01-05",
+            "caseId": "XIM153000000053",
+            "orgno": "00000000000015",
+            "pfmoney": "1540.0",
+            "qzflag": "0",
+            "value": 9
+        },
+        {
+            "labelName": "何一弘",
+            "type": "Customer",
+            "customerId": "35020620010220553X",
+            "customerName": "何一弘",
+            "telId": null,
+            "hospitalId": null,
+            "hospitaLevel": null,
+            "hospitalName": null,
+            "empid": null,
+            "accTime": null,
+            "caseId": null,
+            "orgno": null,
+            "pfmoney": null,
+            "qzflag": null,
+            "value": 17
+        },
+        {
+            "labelName": "05925969337",
+            "type": "Telephone",
+            "customerId": null,
+            "customerName": null,
+            "telId": "05925969337",
+            "hospitalId": null,
+            "hospitaLevel": null,
+            "hospitalName": null,
+            "empid": null,
+            "accTime": null,
+            "caseId": null,
+            "orgno": null,
+            "pfmoney": null,
+            "qzflag": null,
+            "value": 4
+        },
+        {
+            "labelName": "13338468955",
+            "type": "Telephone",
+            "customerId": null,
+            "customerName": null,
+            "telId": "13338468955",
+            "hospitalId": null,
+            "hospitaLevel": null,
+            "hospitalName": null,
+            "empid": null,
+            "accTime": null,
+            "caseId": null,
+            "orgno": null,
+            "pfmoney": null,
+            "qzflag": null,
+            "value": 13
+        },
+        {
+            "labelName": "18030301011",
+            "type": "Telephone",
+            "customerId": null,
+            "customerName": null,
+            "telId": "18030301011",
+            "hospitalId": null,
+            "hospitaLevel": null,
+            "hospitalName": null,
+            "empid": null,
+            "accTime": null,
+            "caseId": null,
+            "orgno": null,
+            "pfmoney": null,
+            "qzflag": null,
+            "value": 11
+        },
+        {
+            "labelName": "朱信德",
+            "type": "Customer",
+            "customerId": "320322198711070159",
+            "customerName": "朱信德",
+            "telId": null,
+            "hospitalId": null,
+            "hospitaLevel": null,
+            "hospitalName": null,
+            "empid": null,
+            "accTime": null,
+            "caseId": null,
+            "orgno": null,
+            "pfmoney": null,
+            "qzflag": null,
+            "value": 14
+        },
+        {
+            "labelName": "NAJ153000002726",
+            "type": "AccidentCase",
+            "customerId": null,
+            "customerName": null,
+            "telId": null,
+            "hospitalId": null,
+            "hospitaLevel": null,
+            "hospitalName": null,
+            "empid": null,
+            "accTime": "2015-03-26",
+            "caseId": "NAJ153000002726",
+            "orgno": "00000000000010",
+            "pfmoney": "3731.15",
+            "qzflag": "0",
+            "value": 1
+        },
+        {
+            "labelName": "朱俊豪",
+            "type": "Customer",
+            "customerId": "320322201112290031",
+            "customerName": "朱俊豪",
+            "telId": null,
+            "hospitalId": null,
+            "hospitaLevel": null,
+            "hospitalName": null,
+            "empid": null,
+            "accTime": null,
+            "caseId": null,
+            "orgno": null,
+            "pfmoney": null,
+            "qzflag": null,
+            "value": 13
+        },
+        {
+            "labelName": "18751618872",
+            "type": "Telephone",
+            "customerId": null,
+            "customerName": null,
+            "telId": "18751618872",
+            "hospitalId": null,
+            "hospitaLevel": null,
+            "hospitalName": null,
+            "empid": null,
+            "accTime": null,
+            "caseId": null,
+            "orgno": null,
+            "pfmoney": null,
+            "qzflag": null,
+            "value": 7
+        },
+        {
+            "labelName": "沛县人民医院",
+            "type": "Hospital",
+            "customerId": null,
+            "customerName": null,
+            "telId": null,
+            "hospitalId": "05",
+            "hospitaLevel": "05",
+            "hospitalName": "沛县人民医院",
+            "empid": null,
+            "accTime": null,
+            "caseId": null,
+            "orgno": null,
+            "pfmoney": null,
+            "qzflag": null,
+            "value": 4
+        },
+        {
+            "labelName": "龙屈鑫",
+            "type": "Customer",
+            "customerId": "522731198606111278",
+            "customerName": "龙屈鑫",
+            "telId": null,
+            "hospitalId": null,
+            "hospitaLevel": null,
+            "hospitalName": null,
+            "empid": null,
+            "accTime": null,
+            "caseId": null,
+            "orgno": null,
+            "pfmoney": null,
+            "qzflag": null,
+            "value": 10
+        },
+        {
+            "labelName": "CHZ153000005053",
+            "type": "AccidentCase",
+            "customerId": null,
+            "customerName": null,
+            "telId": null,
+            "hospitalId": null,
+            "hospitaLevel": null,
+            "hospitalName": null,
+            "empid": null,
+            "accTime": "2015-07-16",
+            "caseId": "CHZ153000005053",
+            "orgno": "00000000002324",
+            "pfmoney": "96000.0",
+            "qzflag": "0",
+            "value": 5
+        },
+        {
+            "labelName": "龙安国",
+            "type": "Customer",
+            "customerId": "522731196208271453",
+            "customerName": "龙安国",
+            "telId": null,
+            "hospitalId": null,
+            "hospitaLevel": null,
+            "hospitalName": null,
+            "empid": null,
+            "accTime": null,
+            "caseId": null,
+            "orgno": null,
+            "pfmoney": null,
+            "qzflag": null,
+            "value": 4
+        },
+        {
+            "labelName": "13861167826",
+            "type": "Telephone",
+            "customerId": null,
+            "customerName": null,
+            "telId": "13861167826",
+            "hospitalId": null,
+            "hospitaLevel": null,
+            "hospitalName": null,
+            "empid": null,
+            "accTime": null,
+            "caseId": null,
+            "orgno": null,
+            "pfmoney": null,
+            "qzflag": null,
+            "value": 13
+        },
+        {
+            "labelName": "张欢",
+            "type": "Customer",
+            "customerId": "310226197808280017",
+            "customerName": "张欢",
+            "telId": null,
+            "hospitalId": null,
+            "hospitaLevel": null,
+            "hospitalName": null,
+            "empid": null,
+            "accTime": null,
+            "caseId": null,
+            "orgno": null,
+            "pfmoney": null,
+            "qzflag": null,
+            "value": 14
+        },
+        {
+            "labelName": "SHH153000005056",
+            "type": "AccidentCase",
+            "customerId": null,
+            "customerName": null,
+            "telId": null,
+            "hospitalId": null,
+            "hospitaLevel": null,
+            "hospitalName": null,
+            "empid": null,
+            "accTime": "2015-06-01",
+            "caseId": "SHH153000005056",
+            "orgno": "00000000000009",
+            "pfmoney": "105000.0",
+            "qzflag": "0",
+            "value": 18
+        },
+        {
+            "labelName": "张玉明",
+            "type": "Customer",
+            "customerId": "310226195211012619",
+            "customerName": "张玉明",
+            "telId": null,
+            "hospitalId": null,
+            "hospitaLevel": null,
+            "hospitalName": null,
+            "empid": null,
+            "accTime": null,
+            "caseId": null,
+            "orgno": null,
+            "pfmoney": null,
+            "qzflag": null,
+            "value": 18
+        },
+        {
+            "labelName": "13311983927",
+            "type": "Telephone",
+            "customerId": null,
+            "customerName": null,
+            "telId": "13311983927",
+            "hospitalId": null,
+            "hospitaLevel": null,
+            "hospitalName": null,
+            "empid": null,
+            "accTime": null,
+            "caseId": null,
+            "orgno": null,
+            "pfmoney": null,
+            "qzflag": null,
+            "value": 7
+        },
+        {
+            "labelName": "13111111111",
+            "type": "Telephone",
+            "customerId": null,
+            "customerName": null,
+            "telId": "13111111111",
+            "hospitalId": null,
+            "hospitaLevel": null,
+            "hospitalName": null,
+            "empid": null,
+            "accTime": null,
+            "caseId": null,
+            "orgno": null,
+            "pfmoney": null,
+            "qzflag": null,
+            "value": 4
+        },
+        {
+            "labelName": "刘玉凤",
+            "type": "Customer",
+            "customerId": "410703194903263525",
+            "customerName": "刘玉凤",
+            "telId": null,
+            "hospitalId": null,
+            "hospitaLevel": null,
+            "hospitalName": null,
+            "empid": null,
+            "accTime": null,
+            "caseId": null,
+            "orgno": null,
+            "pfmoney": null,
+            "qzflag": null,
+            "value": 7
+        },
+        {
+            "labelName": "ZHZ153000029797",
+            "type": "AccidentCase",
+            "customerId": null,
+            "customerName": null,
+            "telId": null,
+            "hospitalId": null,
+            "hospitaLevel": null,
+            "hospitalName": null,
+            "empid": null,
+            "accTime": "2015-08-25",
+            "caseId": "ZHZ153000029797",
+            "orgno": "00000000004523",
+            "pfmoney": "616.0",
+            "qzflag": "0",
+            "value": 2
+        },
+        {
+            "labelName": "18749107899",
+            "type": "Telephone",
+            "customerId": null,
+            "customerName": null,
+            "telId": "18749107899",
+            "hospitalId": null,
+            "hospitaLevel": null,
+            "hospitalName": null,
+            "empid": null,
+            "accTime": null,
+            "caseId": null,
+            "orgno": null,
+            "pfmoney": null,
+            "qzflag": null,
+            "value": 10
+        },
+        {
+            "labelName": "18749107699",
+            "type": "Telephone",
+            "customerId": null,
+            "customerName": null,
+            "telId": "18749107699",
+            "hospitalId": null,
+            "hospitaLevel": null,
+            "hospitalName": null,
+            "empid": null,
+            "accTime": null,
+            "caseId": null,
+            "orgno": null,
+            "pfmoney": null,
+            "qzflag": null,
+            "value": 13
+        },
+        {
+            "labelName": "ZHZX0494",
+            "type": "Employee",
+            "customerId": null,
+            "customerName": null,
+            "telId": null,
+            "hospitalId": null,
+            "hospitaLevel": null,
+            "hospitalName": null,
+            "empid": "ZHZX0494",
+            "accTime": null,
+            "caseId": null,
+            "orgno": null,
+            "pfmoney": null,
+            "qzflag": null,
+            "value": 8
+        },
+        {
+            "labelName": "刘志俊",
+            "type": "Customer",
+            "customerId": "321101199210254411",
+            "customerName": "刘志俊",
+            "telId": null,
+            "hospitalId": null,
+            "hospitaLevel": null,
+            "hospitalName": null,
+            "empid": null,
+            "accTime": null,
+            "caseId": null,
+            "orgno": null,
+            "pfmoney": null,
+            "qzflag": null,
+            "value": 4
+        },
+        {
+            "labelName": "CHZ163A000001GX",
+            "type": "AccidentCase",
+            "customerId": null,
+            "customerName": null,
+            "telId": null,
+            "hospitalId": null,
+            "hospitaLevel": null,
+            "hospitalName": null,
+            "empid": null,
+            "accTime": "2015-07-17",
+            "caseId": "CHZ163A000001GX",
+            "orgno": "00000000002324",
+            "pfmoney": "557.29",
+            "qzflag": "0",
+            "value": 18
+        },
+        {
+            "labelName": "15051149513",
+            "type": "Telephone",
+            "customerId": null,
+            "customerName": null,
+            "telId": "15051149513",
+            "hospitalId": null,
+            "hospitaLevel": null,
+            "hospitalName": null,
+            "empid": null,
+            "accTime": null,
+            "caseId": null,
+            "orgno": null,
+            "pfmoney": null,
+            "qzflag": null,
+            "value": 19
+        }
+    ],
+    "links": [
+        {
+            "source": 0,
+            "target": 1,
+            "relation": "是报案人",
+            "value": 15
+        },
+        {
+            "source": 2,
+            "target": 1,
+            "relation": "是被保人",
+            "value": 16
+        },
+        {
+            "source": 3,
+            "target": 1,
+            "relation": "是领款电话",
+            "value": 9
+        },
+        {
+            "source": 3,
+            "target": 1,
+            "relation": "是报案电话",
+            "value": 7
+        },
+        {
+            "source": 0,
+            "target": 3,
+            "relation": "使用",
+            "value": 12
+        },
+        {
+            "source": 4,
+            "target": 5,
+            "relation": "是报案人",
+            "value": 10
+        },
+        {
+            "source": 4,
+            "target": 5,
+            "relation": "是被保人",
+            "value": 11
+        },
+        {
+            "source": 6,
+            "target": 5,
+            "relation": "是领款电话",
+            "value": 17
+        },
+        {
+            "source": 6,
+            "target": 5,
+            "relation": "是报案电话",
+            "value": 15
+        },
+        {
+            "source": 4,
+            "target": 6,
+            "relation": "使用",
+            "value": 14
+        },
+        {
+            "source": 5,
+            "target": 7,
+            "relation": "治疗于",
+            "value": 19
+        },
+        {
+            "source": 8,
+            "target": 9,
+            "relation": "是报案人",
+            "value": 12
+        },
+        {
+            "source": 8,
+            "target": 9,
+            "relation": "是被保人",
+            "value": 3
+        },
+        {
+            "source": 10,
+            "target": 9,
+            "relation": "是领款电话",
+            "value": 10
+        },
+        {
+            "source": 10,
+            "target": 9,
+            "relation": "是报案电话",
+            "value": 13
+        },
+        {
+            "source": 8,
+            "target": 10,
+            "relation": "使用",
+            "value": 12
+        },
+        {
+            "source": 9,
+            "target": 11,
+            "relation": "业务归属于",
+            "value": 3
+        },
+        {
+            "source": 9,
+            "target": 7,
+            "relation": "治疗于",
+            "value": 1
+        },
+        {
+            "source": 12,
+            "target": 13,
+            "relation": "是报案人",
+            "value": 18
+        },
+        {
+            "source": 14,
+            "target": 13,
+            "relation": "是被保人",
+            "value": 1
+        },
+        {
+            "source": 15,
+            "target": 13,
+            "relation": "是领款电话",
+            "value": 17
+        },
+        {
+            "source": 16,
+            "target": 13,
+            "relation": "是报案电话",
+            "value": 3
+        },
+        {
+            "source": 12,
+            "target": 16,
+            "relation": "使用",
+            "value": 10
+        },
+        {
+            "source": 12,
+            "target": 15,
+            "relation": "使用",
+            "value": 7
+        },
+        {
+            "source": 13,
+            "target": 17,
+            "relation": "治疗于",
+            "value": 8
+        },
+        {
+            "source": 18,
+            "target": 19,
+            "relation": "是报案人",
+            "value": 5
+        },
+        {
+            "source": 20,
+            "target": 19,
+            "relation": "是被保人",
+            "value": 5
+        },
+        {
+            "source": 21,
+            "target": 19,
+            "relation": "是领款电话",
+            "value": 2
+        },
+        {
+            "source": 22,
+            "target": 19,
+            "relation": "是领款电话",
+            "value": 8
+        },
+        {
+            "source": 23,
+            "target": 19,
+            "relation": "是报案电话",
+            "value": 3
+        },
+        {
+            "source": 18,
+            "target": 21,
+            "relation": "使用",
+            "value": 14
+        },
+        {
+            "source": 18,
+            "target": 23,
+            "relation": "使用",
+            "value": 15
+        },
+        {
+            "source": 18,
+            "target": 22,
+            "relation": "使用",
+            "value": 15
+        },
+        {
+            "source": 19,
+            "target": 17,
+            "relation": "治疗于",
+            "value": 13
+        },
+        {
+            "source": 24,
+            "target": 25,
+            "relation": "是报案人",
+            "value": 19
+        },
+        {
+            "source": 24,
+            "target": 25,
+            "relation": "是投保人",
+            "value": 11
+        },
+        {
+            "source": 26,
+            "target": 25,
+            "relation": "是被保人",
+            "value": 11
+        },
+        {
+            "source": 27,
+            "target": 25,
+            "relation": "是领款电话",
+            "value": 8
+        },
+        {
+            "source": 27,
+            "target": 25,
+            "relation": "是报案电话",
+            "value": 12
+        },
+        {
+            "source": 24,
+            "target": 27,
+            "relation": "使用",
+            "value": 3
+        },
+        {
+            "source": 25,
+            "target": 28,
+            "relation": "治疗于",
+            "value": 13
+        },
+        {
+            "source": 29,
+            "target": 30,
+            "relation": "是报案人",
+            "value": 16
+        },
+        {
+            "source": 31,
+            "target": 30,
+            "relation": "是被保人",
+            "value": 10
+        },
+        {
+            "source": 32,
+            "target": 30,
+            "relation": "是领款电话",
+            "value": 1
+        },
+        {
+            "source": 32,
+            "target": 30,
+            "relation": "是报案电话",
+            "value": 9
+        },
+        {
+            "source": 29,
+            "target": 32,
+            "relation": "使用",
+            "value": 15
+        },
+        {
+            "source": 33,
+            "target": 34,
+            "relation": "是报案人",
+            "value": 8
+        },
+        {
+            "source": 35,
+            "target": 34,
+            "relation": "是被保人",
+            "value": 17
+        },
+        {
+            "source": 36,
+            "target": 34,
+            "relation": "是领款电话",
+            "value": 11
+        },
+        {
+            "source": 36,
+            "target": 34,
+            "relation": "是报案电话",
+            "value": 11
+        },
+        {
+            "source": 33,
+            "target": 37,
+            "relation": "使用",
+            "value": 12
+        },
+        {
+            "source": 33,
+            "target": 36,
+            "relation": "使用",
+            "value": 19
+        },
+        {
+            "source": 38,
+            "target": 39,
+            "relation": "是报案人",
+            "value": 2
+        },
+        {
+            "source": 38,
+            "target": 39,
+            "relation": "是投保人",
+            "value": 16
+        },
+        {
+            "source": 38,
+            "target": 39,
+            "relation": "是被保人",
+            "value": 4
+        },
+        {
+            "source": 40,
+            "target": 39,
+            "relation": "是领款电话",
+            "value": 15
+        },
+        {
+            "source": 41,
+            "target": 39,
+            "relation": "是报案电话",
+            "value": 19
+        },
+        {
+            "source": 38,
+            "target": 41,
+            "relation": "使用",
+            "value": 9
+        },
+        {
+            "source": 38,
+            "target": 40,
+            "relation": "使用",
+            "value": 17
+        },
+        {
+            "source": 39,
+            "target": 42,
+            "relation": "业务归属于",
+            "value": 4
+        },
+        {
+            "source": 39,
+            "target": 7,
+            "relation": "治疗于",
+            "value": 11
+        },
+        {
+            "source": 43,
+            "target": 44,
+            "relation": "是被保人",
+            "value": 1
+        },
+        {
+            "source": 45,
+            "target": 44,
+            "relation": "是领款电话",
+            "value": 4
+        },
+        {
+            "source": 43,
+            "target": 45,
+            "relation": "使用",
+            "value": 17
+        },
+        {
+            "source": 44,
+            "target": 17,
+            "relation": "治疗于",
+            "value": 19
+        }
+    ]
+};
+
+var nodes = dataset.nodes;
+var links = dataset.links;
+    var width = 960;
+    var height = 800;
+    var svg = d3.select("svg")
+        .attr("width",width)
+        .attr("height",height);
+    var circle_radius = 30;
+ 
+// 通过布局来转换数据，然后进行绘制
+var simulation = d3.forceSimulation(nodes)
+    .force("link", d3.forceLink(links).distance(200))
+    .force("charge",d3.forceManyBody().strength(-100))
+    .force("center",d3.forceCenter(width/2, height/2));
+ 
+    var color = d3.scaleOrdinal(d3.schemeCategory20);
+    // 绘制线
+    var svg_links = svg.selectAll("path")
+        .data(links)
+        .enter()
+        .append("path")
+        .attr("id",function(d,i){
+        	return "edgepath"+i;
+        })
+        .style("stroke",function(d){
+        	return color(d.value);
+        })
+        .style("stroke-width",3);
+       
+    //节点对象
+    var svg_nodes = svg.selectAll("circle")
+        .data(nodes)
+        .enter()
+        .append("circle")
+        .attr("r",circle_radius)
+        .attr("title",function(d){
+        	return d.type;
+        })
+        .call(d3.drag()
+            .on("start", dragstarted)
+            .on("drag", dragged)
+            .on("end", dragended));
+ //节点描述
+    var svg_text = svg.selectAll("text")
+        .data(nodes)
+        .enter()
+        .append("text")
+        .style("fill","#000")
+        .attr("dominant-baseline","middle")
+        .attr("text-anchor", "middle")//在圆圈中加上数据
+        .text(function(d){
+        	return d.labelName;});
+        	
+        	
+ 	var edges_text = svg.append("g").selectAll(".edgelabel")
+	.data(links)
+	.enter()
+	.append("text")
+	.style("pointer-events", "none").
+	style("fill",function(d){
+		return color(d.value)
+	}).attr("class","edgelabel")
+	.attr("id",function(d,i){return 'edgetext'+i;})
+	.attr("dx",80)
+	.attr("dy",0)
+	.attr("font-size",10);
+//设置线条上的文字
+	edges_text.append('textPath')
+	.attr('xlink:href',function(d,i) {return '#edgepath'+i})
+	.style("pointer-events", "none")
+	.text(function(d){return d.relation;});
+    /**
+     * 节点（开始）拖拽事件
+     */
+    function dragstarted(d) {
+        if (!d3.event.active)
+            simulation.alphaTarget(0.002).restart();
+        d.fx = d.x;
+        d.fy = d.y;
+    }
+ 
+    /**
+     * 节点拖拽事件
+     */
+    function dragged(d) {
+        d.fx = d3.event.x;
+        d.fy = d3.event.y;
+    }
+ 
+    /**
+     * 节点（结束）拖拽事件
+     */
+    function dragended(d) {
+        if (!d3.event.active)
+            simulation.alphaTarget(0);
+    }
+    
+    //箭头
+    var marker=
+        svg.append("marker")
+            .attr("id", "resolved")
+            .attr("markerUnits","userSpaceOnUse")
+            .attr("viewBox", "0 -5 10 10")//坐标系的区域
+            .attr("refX",34)//箭头坐标
+            .attr("refY", -1)
+            .attr("markerWidth", 12)//标识的大小
+            .attr("markerHeight", 12)
+            .attr("orient", "auto")//绘制方向，可设定为：auto（自动确认方向）和 角度值
+            .attr("stroke-width",2)//箭头宽度
+            .append("path")
+            .attr("d", "M0,-5L10,0L0,5")//箭头的路径
+            .attr('fill','#000000');//箭头颜色
+ 
+ 
+    function draw(){
+        svg_nodes
+            .attr("cx",function(d){return d.x;})
+            .attr("cy",function(d){return d.y;})
+            .attr("fill",function (d) {
+                return color(d.value);
+            });
+ 
+        svg_text
+            .attr("x", function(d){ return d.x; })
+            .attr("y", function(d){ return d.y; });
+ 
+        svg_links
+            .attr("d",function(d){
+                return 'M '+d.source.x+' '+d.source.y+' L '+ d.target.x +' '+d.target.y
+            })
+            .attr("marker-end", "url(#resolved)");
+    }
+    simulation.on("tick",draw);
+    svg.call(d3.zoom().scaleExtent([0.05, 8]).on('zoom', () => {
+        // 保存当前缩放的属性值
+        var transform = d3.event.transform;
+        svg_nodes.attr('transform', transform);
+        svg_links.attr("transform",transform);
+        svg_text.attr("transform",transform);
+//      edges_text.attr("transform",transform);
+    })).on('dblclick.zoom', null);
+ 
+</script><!--
+<script>
+	$(function(){
+		//遍历node节点
+		$.each(nodes,function(index,val){
+			//当发生点击事件时，触发函数，获取到当前点击的节点
+			$(document).on("click","circle",function(){
+				var label = val.type;//获取当前的节点名字，根据此变量判断此节点和那些边对应。
+				var text = $(this).attr("title");
+				if(label == text){
+					$.each(links, function(i,d) {
+						var source = links[i].source;
+						var target = links[i].target;
+						if(source.type==label || target.type == label ){
+							var textid = "#edgetext" + i+"";
+							var pathid = "#edgepath"+i+"";
+							$(textid).hide();
+							$(pathid).hide();
+							var ttch = "text:eq(" + index + ")";
+							$(ttch).hide();
+						}
+					});
+				}
+				
+				$(this).hide();
+			});
+		});
+	});
+</script>-->
+<script>
+$(function(){
+	var btndiv = $("#btn");
+	var flag = 0;
+	//动态生成节点标签
+//	$.each(nodes,function(i,d){
+//		var tdEl = $("<button class='btn btn-primary show'></button>").append(d.type);
+//		tdEl.attr("title",d.type).attr("flag",flag);
+//		btndiv.append(tdEl);
+//	});
+//		
+	$(document).on("click",".show",function(){
+				var flag = $(this).attr("flag");
+				if(flag%2 == 0){//flag %2 ==0 是显示状态，点击隐藏
+					var label = $(this).attr("title");//获取当前的节点名字，根据此变量判断此节点和那些边对应。
+					$.each(nodes, function(index,val) {
+						var text = $("circle:eq("+index+")").attr("title");
+						console.log("circle.text="+text);
+						if(text == label){
+							$.each(links, function(i,d) {
+									var source = links[i].source;
+									var target = links[i].target;
+									if(source.type==label || target.type == label ){
+										var textid = "#edgetext" + i+"";
+										var pathid = "#edgepath"+i+"";
+											console.log(textid);
+											console.log(pathid);
+										$(textid).hide();
+										$(pathid).hide();
+										var ttch = "text:eq(" + index + ")";
+										$(ttch).hide();
+									}
+							});
+							$("circle:eq("+index+")").hide();
+						}
+					});
+					flag ++;
+					$(this).attr("flag",flag);
+				}else{
+					var label = $(this).attr("title");//获取当前的节点名字，根据此变量判断此节点和那些边对应。
+					$.each(nodes, function(index,val) {
+						var text = $("circle:eq("+index+")").attr("title");
+						console.log("circle.text="+text);
+						if(text == label){
+							$.each(links, function(i,d) {
+									var source = links[i].source;
+									var target = links[i].target;
+									if(source.type==label || target.type == label ){
+										var textid = "#edgetext" + i+"";
+										var pathid = "#edgepath"+i+"";
+											console.log(textid);
+											console.log(pathid);
+										$(textid).show();
+										$(pathid).show();
+										var ttch = "text:eq(" + index + ")";
+										$(ttch).show();
+									}
+							});
+							$("circle:eq("+index+")").show();
+						}
+					});
+					flag ++;
+					$(this).attr("flag",flag);
+				}
+	});
+});
+</script>
+</html>
+ 
+<!----------------------- 
+作者：xu187 
+来源：CSDN 
+原文：https://blog.csdn.net/xu187/article/details/80256587 
+版权声明：本文为博主原创文章，转载请附上博文链接！-->

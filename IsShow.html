@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<script type="text/javascript" src="js/jquery-3.2.1.min.js" ></script>
+	</head>
+	<body>
+		<p>你看我是什么内容</p>
+		<button id="btn">显示</button>
+		<script>
+			$(document).on("click","#btn",function(){
+				if($("p").is(":hidden")){
+					$("p").text("其实我啥也没看见");
+					$("#btn").text("点击显示");
+					$("p").show();
+				}else{
+					$("p").text("快说你看到了");
+					$("#btn").text("点击隐藏");
+					$("p").hide();
+				}
+			});
+		</script>
+	</body>
+</html>
